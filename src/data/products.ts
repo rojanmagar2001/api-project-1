@@ -1,4 +1,4 @@
-const productsData = [
+export const productsData = [
   {
     id: 1,
     title: "Red Nail Polish",
