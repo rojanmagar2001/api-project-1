@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  createProductController,
   getAllProductsController,
   getProductByIdController,
 } from "../controllers/products.controller.js";
@@ -8,9 +9,7 @@ const productsRouter = Router();
 
 productsRouter.get("/", getAllProductsController);
 
-productsRouter.post("/", (req, res) => {
-  res.send("Create a new product");
-});
+productsRouter.post("/", createProductController);
 
 productsRouter.get("/:id", getProductByIdController);
 

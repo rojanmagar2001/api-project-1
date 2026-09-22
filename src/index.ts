@@ -3,6 +3,8 @@ import productsRouter from "./routes/products.route.js";
 
 const app = express();
 
+app.use(express.json());
+
 app.use("/products", productsRouter);
 
 app.get("/", (req, res) => {
