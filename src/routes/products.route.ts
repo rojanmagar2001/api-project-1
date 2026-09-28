@@ -4,12 +4,18 @@ import {
   getAllProductsController,
   getProductByIdController,
 } from "../controllers/products.controller.js";
+import validate from "../middleware/validate.js";
+import { createProductSchema } from "../schema/products.js";
 
 const productsRouter = Router();
 
 productsRouter.get("/", getAllProductsController);
 
-productsRouter.post("/", createProductController);
+productsRouter.post(
+  "/",
+  validate(createProductSchema),
+  createProductController,
+);
 
 productsRouter.get("/:id", getProductByIdController);
 

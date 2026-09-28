@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { productsData } from "../data/products.js";
-import { createProductSchema } from "../schema/products.js";
+import { CreateProductInput, createProductSchema } from "../schema/products.js";
 
 export const getAllProductsController = (req: Request, res: Response) => {
   res.status(200).json({
@@ -28,22 +28,12 @@ export const getProductByIdController = (req: Request, res: Response) => {
 };
 
 export const createProductController = (req: Request, res: Response) => {
-  const postBody = req.body;
-
-  const parsedResult = createProductSchema.safeParse(postBody);
-
-  if (!parsedResult.success) {
-    res.status(400).json({
-      message: "Invalid product data",
-      errors: parsedResult.error.issues,
-    });
-    return;
-  }
+  const postBody = req.body as unknown as CreateProductInput;
 
   const newProduct = {
     id: productsData.length + 1,
-    title: parsedResult.data.name,
-    price: parsedResult.data.price,
+    title: postBody.name,
+    price: postBody.price,
   };
 
   productsData.push(newProduct);
